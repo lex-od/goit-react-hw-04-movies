@@ -2,7 +2,7 @@
     "name": "react-clear-template",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://lex-od.github.io/repository-name",
+    "homepage": "https://lex-od.github.io/goit-react-hw-04-movies",
     "dependencies": {
         "@testing-library/jest-dom": "^5.11.10",
         "@testing-library/react": "^11.2.6",
@@ -14,6 +14,7 @@
         "node-sass": "^5.0.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
+        "react-router-dom": "^5.2.0",
         "react-scripts": "4.0.3",
         "web-vitals": "^1.1.1"
     },
