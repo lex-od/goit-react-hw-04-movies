@@ -1,19 +1,12 @@
 // import './styles/App.module.scss';
 
 import AppBar from './components/AppBar';
+import HomePage from './pages/HomePage';
 
-const App = () => {
-    return (
-        <AppBar>
-            <h1>Welcome</h1>
-        </AppBar>
-    );
-};
-
-// const App = () => (
-//     <AppBar>
-//         <h1>Welcome</h1>
-//     </AppBar>
-// );
+const App = () => (
+    <AppBar>
+        <HomePage />
+    </AppBar>
+);
 
 export default App;
