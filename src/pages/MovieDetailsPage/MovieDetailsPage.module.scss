@@ -1,0 +1,34 @@
+.goBackBtn {
+    margin-bottom: 15px;
+}
+
+.movieWrapper {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.moviePoster {
+    width: 300px;
+}
+
+.movieDescrWrapper {
+    padding-left: 15px;
+}
+
+.movieTitle {
+    margin-bottom: 15px;
+}
+
+.movieDescrData {
+    margin-bottom: 15px;
+}
+
+.movieDescrTitle {
+    margin-bottom: 15px;
+}
+
+.additionalListItem {
+    &:not(:last-child) {
+        margin-bottom: 15px;
+    }
+}
