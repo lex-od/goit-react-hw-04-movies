@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import css from './MovieList.module.scss';
 
-const MovieList = ({ movies }) => (
+const MovieList = ({ movies, location }) => (
     <ul>
         {movies.map(({ id, title }) => (
             <li className={css.movieListItem} key={id}>
-                {title}
+                <Link
+                    to={{
+                        pathname: `/movies/${id}`,
+                        state: { from: location },
+                    }}
+                >
+                    {title}
+                </Link>
             </li>
         ))}
     </ul>
@@ -20,4 +28,4 @@ MovieList.propTypes = {
     ).isRequired,
 };
 
-export default MovieList;
+export default withRouter(MovieList);
