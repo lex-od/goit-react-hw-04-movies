@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, Route, Switch } from 'react-router-dom';
 import css from './MovieDetailsPage.module.scss';
 import routes from '../../routes';
 import tmdbApi from '../../services/tmdbApi';
@@ -32,6 +33,7 @@ export default class MovieDetailsPage extends Component {
 
     render() {
         const { movie } = this.state;
+        const { match, location } = this.props;
 
         return (
             movie && (
@@ -77,15 +79,43 @@ export default class MovieDetailsPage extends Component {
                             )}
                         </div>
                     </div>
-                    <div>
+                    <div className={css.additionalWrapper}>
                         <h2 className={css.movieDescrTitle}>
                             Дополнительная информация
                         </h2>
                         <ul>
-                            <li className={css.additionalListItem}>Актеры</li>
-                            <li className={css.additionalListItem}>Обзоры</li>
+                            <li className={css.additionalListItem}>
+                                <Link
+                                    to={{
+                                        pathname: `${match.url}/cast`,
+                                        state: { from: location.state?.from },
+                                    }}
+                                >
+                                    Актеры
+                                </Link>
+                            </li>
+                            <li className={css.additionalListItem}>
+                                <Link
+                                    to={{
+                                        pathname: `${match.url}/reviews`,
+                                        state: { from: location.state?.from },
+                                    }}
+                                >
+                                    Обзоры
+                                </Link>
+                            </li>
                         </ul>
                     </div>
+                    <Switch>
+                        <Route
+                            path={`${match.path}/cast`}
+                            component={() => <h2>Cast!!!</h2>}
+                        />
+                        <Route
+                            path={`${match.path}/reviews`}
+                            component={() => <h2>reviews!!!</h2>}
+                        />
+                    </Switch>
                 </>
             )
         );

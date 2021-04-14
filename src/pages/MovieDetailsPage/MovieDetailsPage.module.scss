@@ -4,7 +4,6 @@
 
 .movieWrapper {
     display: flex;
-    margin-bottom: 15px;
 }
 
 .moviePoster {
@@ -25,6 +24,10 @@
 
 .movieDescrTitle {
     margin-bottom: 15px;
+}
+
+.additionalWrapper {
+    padding: 15px 0;
 }
 
 .additionalListItem {
