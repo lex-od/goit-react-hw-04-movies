@@ -1,0 +1,14 @@
+.castListItem {
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.castListImg {
+    width: 100px;
+    margin-bottom: 5px;
+}
+
+.castListName {
+    margin-bottom: 5px;
+}

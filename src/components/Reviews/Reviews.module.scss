@@ -1,0 +1,11 @@
+.reviewsListItem {
+    &:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.reviewsListAuthor {
+    margin-bottom: 5px;
+
+    font-weight: 700;
+}

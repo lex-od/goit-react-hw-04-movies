@@ -3,23 +3,53 @@ import { Link, Route, Switch } from 'react-router-dom';
 import css from './MovieDetailsPage.module.scss';
 import routes from '../../routes';
 import tmdbApi from '../../services/tmdbApi';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
 
 export default class MovieDetailsPage extends Component {
     state = {
         movie: null,
+        cast: [],
+        reviews: [],
     };
 
     componentDidMount() {
-        this.getMovieFromPath();
+        this.getMovieDetails();
+        this.getMovieCredits();
+        this.getMovieReviews();
     }
 
-    getMovieFromPath = async () => {
+    getMovieDetails = async () => {
         try {
-            const movieId = Number(this.props.match.params.movieId);
-
-            const movie = await tmdbApi.getMovieDetails({ movieId });
+            const movie = await tmdbApi.getMovieDetails({
+                movieId: this.getMovieIdFromPath(),
+            });
 
             this.setState({ movie });
+        } catch (err) {
+            console.log(`${err.name}: ${err.message}`);
+        }
+    };
+
+    getMovieCredits = async () => {
+        try {
+            const { cast } = await tmdbApi.getMovieCredits({
+                movieId: this.getMovieIdFromPath(),
+            });
+
+            this.setState({ cast });
+        } catch (err) {
+            console.log(`${err.name}: ${err.message}`);
+        }
+    };
+
+    getMovieReviews = async () => {
+        try {
+            const { results } = await tmdbApi.getMovieReviews({
+                movieId: this.getMovieIdFromPath(),
+            });
+
+            this.setState({ reviews: results });
         } catch (err) {
             console.log(`${err.name}: ${err.message}`);
         }
@@ -31,8 +61,12 @@ export default class MovieDetailsPage extends Component {
         history.push(location.state?.from || routes.movies);
     };
 
+    getMovieIdFromPath() {
+        return Number(this.props.match.params.movieId);
+    }
+
     render() {
-        const { movie } = this.state;
+        const { movie, cast, reviews } = this.state;
         const { match, location } = this.props;
 
         return (
@@ -106,14 +140,21 @@ export default class MovieDetailsPage extends Component {
                             </li>
                         </ul>
                     </div>
+
                     <Switch>
                         <Route
                             path={`${match.path}/cast`}
-                            component={() => <h2>Cast!!!</h2>}
+                            render={props => <Cast {...props} cast={cast} />}
                         />
                         <Route
                             path={`${match.path}/reviews`}
-                            component={() => <h2>reviews!!!</h2>}
+                            render={props =>
+                                reviews?.length ? (
+                                    <Reviews {...props} reviews={reviews} />
+                                ) : (
+                                    <p>Нет обзоров для этого фильма</p>
+                                )
+                            }
                         />
                     </Switch>
                 </>
