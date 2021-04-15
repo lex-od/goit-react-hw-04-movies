@@ -11,6 +11,12 @@ export default class MoviesPage extends Component {
         movies: [],
     };
 
+    componentDidMount() {
+        if (this.getQueryFromProps(this.props)) {
+            this.searchMovies();
+        }
+    }
+
     componentDidUpdate(prevProps, prevState) {
         const prevQuery = this.getQueryFromProps(prevProps);
         const currQuery = this.getQueryFromProps(this.props);
